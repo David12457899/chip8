@@ -138,6 +138,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bit_operations.c" />
+    <ClCompile Include="cpu.c" />
+    <ClCompile Include="main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bit_operations.h" />
+    <ClInclude Include="chip.h" />
+    <ClInclude Include="cpu.h" />
+    <ClInclude Include="defines.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
