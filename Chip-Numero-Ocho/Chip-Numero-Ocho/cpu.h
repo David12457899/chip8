@@ -2,6 +2,7 @@
 
 #include "defines.h"
 #include "bit_operations.h"
+#include "cpu_helper.h"
 
 typedef struct cpu_context {
 	

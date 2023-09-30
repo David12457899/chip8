@@ -20,6 +20,9 @@ static void instruction_cls_ret(cpu_context* cpu_ctx, u16 instruction)
 
 static void instruction_jp(cpu_context* cpu_ctx, u16 instruction)
 {
+	address = get_address_from
+	
+	cpu_ctx->PC = address;
 }
 
 static void instruction_call(cpu_context* cpu_ctx, u16 instruction)
@@ -82,10 +85,6 @@ static void instruction_interrupt(cpu_context* cpu_ctx, u16 instruction)
 {
 }
 
-static int get_instruction_type(u16 instruction) {
-	return instruction >> 4;
-}
-
 static instruction_function instructions[] = {
 	&instruction_cls_ret,
 	&instruction_jp,
@@ -106,7 +105,7 @@ static instruction_function instructions[] = {
 };
 
 void handle_instruction(cpu_context* cpu_ctx, u16 instruction) {
-	int instruction_type = get_instruction_type(instruction);
+	int instruction_type = get_address_from_instruction(instruction);
 
 	instructions[instruction_type](cpu_ctx, instruction);
 }
