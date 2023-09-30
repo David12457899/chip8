@@ -18,9 +18,11 @@ typedef struct cpu_context {
 	u8 SP;
 } cpu_context;
 
-typedef int (*instruction_function)(u16 instruction);
+typedef int (*instruction_function)(cpu_context* cpu_ctx, u16 instruction);
+
+// specific subtypes of instructions
 
 // Main function
-void handle_instruction(u16 instruction);
+void handle_instruction(cpu_context* cpu_ctx, u16 instruction);
 
-
+	
