@@ -1,6 +1,6 @@
 #include "cpu.h"
 
-static void instruction_cls_ret(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_cls_ret(chip_context* chip_ctx, u16 instruction)
 {
 	// 00E0(CLS)/00EE(RET)
 	int subtype = get_instruction_part(instruction, 3);
@@ -18,68 +18,68 @@ static void instruction_cls_ret(cpu_context* cpu_ctx, u16 instruction)
 	}
 }
 
-static void instruction_jp(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_jp(chip_context* chip_ctx, u16 instruction)
 {
-	cpu_ctx->PC = get_address_from_instruction(instruction);
+	chip_ctx->cpu->PC = get_address_from_instruction(instruction);
 }
 
-static void instruction_call(cpu_context* cpu_ctx, u16 instruction)
-{
-}
-
-static void instruction_se_byte(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_call(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_sne_byte(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_se_byte(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_se(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_sne_byte(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_ld(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_se(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_add_byte(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_ld(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_binary_operation(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_add_byte(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_sne(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_binary_operation(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_ld_addr(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_sne(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_jp_addr(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_ld_addr(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_rnd_addr(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_jp_addr(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_drw_addr(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_rnd_addr(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_skp(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_drw_addr(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_skp_sknp(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_skp(chip_context* chip_ctx, u16 instruction)
 {
 }
 
-static void instruction_interrupt(cpu_context* cpu_ctx, u16 instruction)
+static void instruction_skp_sknp(chip_context* chip_ctx, u16 instruction)
+{
+}
+
+static void instruction_interrupt(chip_context* chip_ctx, u16 instruction)
 {
 }
 
@@ -102,9 +102,9 @@ static instruction_function instructions[] = {
 	&instruction_interrupt
 };
 
-void handle_instruction(cpu_context* cpu_ctx, u16 instruction) {
+void handle_instruction(chip_context* chip_ctx, u16 instruction) {
 	int instruction_type = get_address_from_instruction(instruction);
 
-	instructions[instruction_type](cpu_ctx, instruction);
+	instructions[instruction_type](chip_ctx, instruction);
 }
 

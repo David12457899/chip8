@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "bit_operations.h"
 #include "cpu_helper.h"
+#include "chip.h"
 
 typedef struct cpu_context {
 	
@@ -19,11 +20,11 @@ typedef struct cpu_context {
 	u8 SP;
 } cpu_context;
 
-typedef int (*instruction_function)(cpu_context* cpu_ctx, u16 instruction);
+typedef int (*instruction_function)(chip_context* chip_ctx, u16 instruction);
 
 // specific subtypes of instructions
 
 // Main function
-void handle_instruction(cpu_context* cpu_ctx, u16 instruction);
+void handle_instruction(chip_context* chip_ctx, u16 instruction);
 
 	
