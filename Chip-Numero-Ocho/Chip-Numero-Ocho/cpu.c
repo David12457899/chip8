@@ -25,6 +25,10 @@ static void instruction_jp(chip_context* chip_ctx, u16 instruction)
 
 static void instruction_call(chip_context* chip_ctx, u16 instruction)
 {
+	chip_ctx->stack[chip_ctx->cpu->SP] = chip_ctx->cpu->PC;
+	chip_ctx->cpu->SP++;
+
+	instruction_jp(chip_ctx, instruction);
 }
 
 static void instruction_se_byte(chip_context* chip_ctx, u16 instruction)

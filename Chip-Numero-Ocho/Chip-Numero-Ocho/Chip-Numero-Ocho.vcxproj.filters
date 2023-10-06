@@ -20,6 +20,9 @@
     <ClCompile Include="bit_operations.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="cpu_helper.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cpu.h">
@@ -32,6 +35,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="bit_operations.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="cpu_helper.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
