@@ -20,9 +20,7 @@ static void instruction_cls_ret(cpu_context* cpu_ctx, u16 instruction)
 
 static void instruction_jp(cpu_context* cpu_ctx, u16 instruction)
 {
-	address = get_address_from
-	
-	cpu_ctx->PC = address;
+	cpu_ctx->PC = get_address_from_instruction(instruction);
 }
 
 static void instruction_call(cpu_context* cpu_ctx, u16 instruction)
