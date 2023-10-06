@@ -9,8 +9,8 @@ typedef struct cpu_context {
 
 	// Special
 	u16 I;
-	u8 delayRegister; // weird name, will handle it later
-	u8 timerRegister; // weird name, will handle it later
+	u8 DT; // Delay timer
+	u8 ST; // Set sound timer
 
 	// Non-Accessible
 	u16 PC;
@@ -21,6 +21,4 @@ typedef struct chip_context{
 	cpu_context* cpu;
 
 	u16 stack[STACK_SIZE];
-
-	u8 skip_instruction;
 } chip_context;

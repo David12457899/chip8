@@ -18,6 +18,7 @@
 
 #define PART_TYPE 0
 #define PART_SUBTYPE 3
+#define PART_BYTES 3
 
 typedef int (*instruction_function)(chip_context* chip_ctx, u16 instruction);
 

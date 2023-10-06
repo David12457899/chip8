@@ -36,13 +36,19 @@ static void instruction_se_byte(chip_context* chip_ctx, u16 instruction)
 	char kk = get_kk_from_instruction(instruction);
 	int x = get_instruction_part(instruction, 1);
 	
-	chip_ctx->cpu->PC++;
+	if (chip_ctx->cpu->V[x] == kk) {
+		chip_ctx->cpu->PC++;
+	}
 }
 
 static void instruction_sne_byte(chip_context* chip_ctx, u16 instruction)
 {
-	instruction_se_byte(chip_ctx, instruction);
-	chip_ctx->skip_instruction = 1 - chip_ctx->skip_instruction;
+	char kk = get_kk_from_instruction(instruction);
+	int x = get_instruction_part(instruction, 1);
+
+	if (chip_ctx->cpu->V[x] != kk) {
+		chip_ctx->cpu->PC++;
+	}
 }
 
 static void instruction_se(chip_context* chip_ctx, u16 instruction)
@@ -51,7 +57,7 @@ static void instruction_se(chip_context* chip_ctx, u16 instruction)
 	int y = get_instruction_part(instruction, 2);
 
 	if (chip_ctx->cpu->V[x] == chip_ctx->cpu->V[y]) {
-		chip_ctx->skip_instruction = 1;
+		chip_ctx->cpu->PC++;
 	}
 }
 
@@ -137,35 +143,110 @@ static void instruction_binary_operation(chip_context* chip_ctx, u16 instruction
 
 static void instruction_sne(chip_context* chip_ctx, u16 instruction)
 {
+	int x = get_instruction_part(instruction, 1);
+	int y = get_instruction_part(instruction, 2);
 
+	if (chip_ctx->cpu->V[x] != chip_ctx->cpu->V[y]) {
+		chip_ctx->cpu->PC++;
+	}
 }
 
 static void instruction_ld_addr(chip_context* chip_ctx, u16 instruction)
 {
+	chip_ctx->cpu->I = get_address_from_instruction(instruction);
 }
 
-static void instruction_jp_addr(chip_context* chip_ctx, u16 instruction)
+static void instruction_jp_addr(chip_context* chip_ctx, u16 instruction)	
 {
+	chip_ctx->cpu->PC = get_address_from_instruction(instruction) + chip_ctx->cpu->V[0];
 }
 
 static void instruction_rnd_addr(chip_context* chip_ctx, u16 instruction)
 {
+	u8 rnd = rand() % BYTE_MAX;
+	int x = get_instruction_part(instruction, 1);
+	char kk = get_kk_from_instruction(instruction);
+
+	chip_ctx->cpu->V[x] = rnd & kk;
 }
 
 static void instruction_drw_addr(chip_context* chip_ctx, u16 instruction)
 {
-}
+	int x = get_instruction_part(instruction, 1);
+	int y = get_instruction_part(instruction, 2);
+	int bytes = get_instruction_part(instruction, PART_BYTES);
 
-static void instruction_skp(chip_context* chip_ctx, u16 instruction)
-{
+	chip_ctx->cpu->V[0xF] = chip_ctx->cpu->V[x] == chip_ctx->cpu->V[y] ? 1 : 0;
+
+	// todo: finish later, related to animation
 }
 
 static void instruction_skp_sknp(chip_context* chip_ctx, u16 instruction)
 {
+	// Ex9E(SKP)/ExA1(SKNP)
+	int subtype = get_instruction_part(instruction, PART_TYPE);
+
+	switch (subtype) {
+		case 1:
+			// todo: finish this later, keyboard pressing
+			break;
+	
+		case 0xE:
+			// todo: finish this later, keyboard pressing
+			break;
+	
+		default:
+			break;
+	}
 }
 
 static void instruction_interrupt(chip_context* chip_ctx, u16 instruction)
 {
+	int x = get_instruction_part(instruction, 1);
+	
+	// subtype of size 1 byte
+	int subtype = get_kk_from_instruction(instruction);
+
+	switch (subtype) {
+		case 0x07:
+			chip_ctx->cpu->V[x] = chip_ctx->cpu->DT;
+			break;
+
+		case 0x0A:
+			// todo: finish this later, keyboard pressing
+			break;
+
+		case 0x15:
+			chip_ctx->cpu->DT = chip_ctx->cpu->V[x];
+			break;
+
+		case 0x18:
+			chip_ctx->cpu->ST = chip_ctx->cpu->V[x];
+			break;
+		
+		case 0x1E:
+			chip_ctx->cpu->I += chip_ctx->cpu->V[x];
+			break;
+
+		case 0x29:
+			// todo: do later, has to do with sprite
+			break;
+
+		case 0x33:
+			// todo: Messing with memory
+			break;
+
+		case 0x55:
+			// todo: Messing with memory
+			break;
+
+		case 0x65:
+			// todo: Messing with memory
+			break;
+
+		default:
+			break;
+	}
 }
 
 static instruction_function instructions[] = {
