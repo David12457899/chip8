@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define CHUNCK_READ_SIZE 4
+#include "defines.h"
+
+#define CHUNCK_READ_SIZE 2
 
 void disassemble(char* input_file, char* output_file);
