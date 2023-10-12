@@ -29,6 +29,7 @@ void disassemble(char* input_file, char* output_file)
 	u8 bytes_read = 0;
 
 	input_fp = fopen(input_file, "rb");
+	output_fp = fopen(output_file, "a");
 
 	if (input_fp == NULL) {
 		fprintf(stderr, "unable to open input file: %s\n", input_file);
@@ -38,15 +39,10 @@ void disassemble(char* input_file, char* output_file)
 
 	while ((bytes_read = fread(chunk, 1, CHUNCK_READ_SIZE, input_fp)) > 0) {
 		translate_chunck(chunk, translated_chunck);
-
-		output_fp = fopen(output_file, "a");
 		
 		fprintf(output_fp, "%s\n", translated_chunck);
-	
-		fclose(output_fp);
 	}
 
 	fclose(input_fp);
-
-	fprintf(stderr, "unable to open input file: %s\n", input_file);
+	fclose(output_fp);
 }
