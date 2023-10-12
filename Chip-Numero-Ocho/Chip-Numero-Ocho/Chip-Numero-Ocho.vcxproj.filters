@@ -23,6 +23,12 @@
     <ClCompile Include="cpu_helper.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="disassembler.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="logger.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cpu.h">
@@ -38,6 +44,12 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="cpu_helper.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="disassembler.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="logger.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

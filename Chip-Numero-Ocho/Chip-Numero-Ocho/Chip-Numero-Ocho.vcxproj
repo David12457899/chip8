@@ -97,7 +97,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -141,6 +141,8 @@
     <ClCompile Include="bit_operations.c" />
     <ClCompile Include="cpu.c" />
     <ClCompile Include="cpu_helper.c" />
+    <ClCompile Include="disassembler.c" />
+    <ClCompile Include="logger.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +151,8 @@
     <ClInclude Include="cpu.h" />
     <ClInclude Include="cpu_helper.h" />
     <ClInclude Include="defines.h" />
+    <ClInclude Include="disassembler.h" />
+    <ClInclude Include="logger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
